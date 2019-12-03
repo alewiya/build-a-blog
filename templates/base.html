@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title></title>
+    <style>
+         textarea {
+                margin: 10px 0;
+                width: 540px;
+                height: 120px;
+            }
+            h1{
+                text-align: center;
+            }
+            ul li{
+                list-style: none;
+            }
+    </style>
+    </head>
+    <body>
+        <nav>
+          <a href="/blog">Main Blog Page</a>
+    
+          <a href="/add">Add a Blog Entry</a> 
+        </nav>
+        {% block content %}
+        
+        {% endblock %}
+    </body>
+</html>
