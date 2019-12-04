@@ -13,33 +13,39 @@ class Blog(db.Model):
     def __init__(self,title,body):
         self.title=title
         self.body=body
-@app.route('/add', methods=['POST','GET'])
+@app.route('/newpost', methods=['POST','GET'])
 def add_post():
+    error_title=''
+    error_body=''
     if request.method =='POST':
         post_title=request.form['title']
         post_blog=request.form['new-blog']
-        # error_title=''
-        # error_body=''
-        new_blog=Blog(post_title,post_blog)
-        db.session.add(new_blog)
-        db.session.commit()
-    # if int(len(post_title)) <= 0:
-    #     error_title='Please insert the title of your new post'
-    #     post_title=''
-    # elif int(len(post_blog)) <= 0:
-    #     error_boby='Please insert the body of  your new post'
-    #     post_blog=''
-    # if not error_title and not error_body and not post_title == '' and not post_blog == "":
-    #     return redirect('/blog')
-    posts=Blog.query.all()
-    return render_template('newpost.html', posts=posts)#,error_title=error_title,error_boby=error_boby,
-    #post_title=post_title,post_blog=post_blog)
+
+        if post_title == "":
+            error_title='Please insert the title of your new post'
+        if post_blog == "":
+            error_body='Please insert the body of  your new post'
+        if not error_title and not error_body: 
+            new_blog=Blog(post_title,post_blog)
+            db.session.add(new_blog)
+            db.session.commit()
+            return redirect("/get-id?id={}".format(new_blog.id))
+
+        else:
+            return render_template('newpost.html', error_title=error_title, error_body=error_body)
+    else:
+        return render_template('newpost.html')
 @app.route('/blog')
 def blog():
     blog_posts=  Blog.query.all()
     return render_template('blog.html',blog_posts=blog_posts)
-@app.route('/')
-def index():
-    return render_template('newpost.html')
+# #create different app route to redirect to /blog?id={id} to display get-id.html template
+@app.route('/get-id')
+def display_post(): 
+    blog_id=request.args.get('id')
+    blog_posts=Blog.query.filter_by(id=blog_id).first()
+    return render_template('get-id.html',post=blog_posts)
+    
+
 if __name__=='__main__':
     app.run()

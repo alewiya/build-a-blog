@@ -3,13 +3,32 @@
     <head>
     <title></title>
     <style>
-         textarea {
+        body{
+            background-color:lightsteelblue;
+        }
+        .error{
+            background-color:red;
+        }
+        textarea {
                 margin: 10px 0;
                 width: 540px;
                 height: 120px;
             }
+        form{
+            padding: 20px;
+            width: 540px;
+            background-color:lightgray;
+        }
+        label{
+            color:blue;
+        }
+        input{
+            color:blue;
+        }
             h1{
+                color:blue;
                 text-align: center;
+
             }
             ul li{
                 list-style: none;
@@ -18,10 +37,17 @@
     </head>
     <body>
         <nav>
-          <a href="/blog">Main Blog Page</a>
+          <a href="/blog">Main Blog Page &nbsp;</a>
     
-          <a href="/add">Add a Blog Entry</a> 
+          <a href="/newpost">Add a Blog Entry</a> 
         </nav>
+        {% with messages =get_flashed_messages(with_categories=True) %}
+        <ul>
+            {% for category,message in messages %}
+            <li class="{{category}}">{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endwith %}
         {% block content %}
         
         {% endblock %}

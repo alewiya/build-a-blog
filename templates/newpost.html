@@ -2,16 +2,17 @@
 
 {% block content %}
   <h1>Add a Blog Entry</h1>
-  <form action='/blog'>
+  <form action='/newpost' method='post'>
     <nav>
       <label for=tit>Title for your new blog:</label>
-      <input type='text' id='tit' name='title'>
-      <span class="error">{{error_title}}</span>
+      <input type='text' id='tit' name='title' placeholder="enter your Title">
+      <span class='error'>{{error_title}}</span>
+      <br>
       <br>
       <label for='new'>Your new blog:</label>
     </nav>
-    <textarea name='new-blog' value="Enter the new post..."></textarea>
-    <span class="error">{{error_body}}</span>
+    <textarea name='new-blog' placeholder="enter your Body"></textarea>
+    <span class='error'>{{error_body}}</span>
       <br>
     <input type="submit" value='Add Entry'>
 </form>

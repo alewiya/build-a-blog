@@ -3,10 +3,11 @@
 {% block content %}
 <h1>Bulid a Blog</h1>
  <ul>
-  {% for blog in blog_posts %}
+  {% for post in blog_posts %}
   <li>
-    <h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2>
-    <p>{{blog.body}}</p>
+      <h2><a href="/get-id?id={{post.id}}"> {{post.title}}</a></h2>
+    <!-- <h2><a href="get-id?id={{post.id}}"></a>{{post.title}}</a></h2> -->
+    <p>{{post.body}}</p>
     <hr>
   </li>
   {% endfor %}
