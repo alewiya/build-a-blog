@@ -46,6 +46,8 @@ def display_post():
     blog_posts=Blog.query.filter_by(id=blog_id).first()
     return render_template('get-id.html',post=blog_posts)
     
-
+@app.route('/')
+def index():
+    return redirect('/blog')
 if __name__=='__main__':
     app.run()
